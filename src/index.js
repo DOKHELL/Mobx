@@ -1,18 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
+import { BrowserRouter } from 'react-router-dom';
 import { Provider } from "mobx-react";
 
-import store from './store'
+import authStore from "./stores/authStore";
 
 const stores = {
-    store
+    authStore,
 };
-
 
 ReactDOM.render(
     <Provider {...stores}>
-        <App />
+        <BrowserRouter>
+            <App />
+        </BrowserRouter>
     </Provider>,
     document.getElementById('root'));
 

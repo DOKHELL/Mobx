@@ -1,15 +1,21 @@
 import React, {Component} from 'react';
-import {inject, observer} from "mobx-react";
+import { Route, Switch, withRouter } from "react-router-dom";
+import {observer} from "mobx-react";
+import Login from "./pages/Login";
 
-@inject('store')
+
+
+
+
+@withRouter
 @observer
 class App extends Component {
   render() {
     return (
         <div>
-            <span>{this.props.store.counter}</span><br/>
-            <button onClick={this.props.store.Increment}>+1</button>
-            <button onClick={this.props.store.Decrement}>-1</button>
+            <Switch>
+                <Route path='/login' component={Login}/>
+            </Switch>
         </div>
     )
   }
