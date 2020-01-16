@@ -22,8 +22,8 @@ class Login extends Component {
                .email('Invalid email')
                .required('Required'),
             password: Yup.string()
-                .min(6, 'Too Short')
-                .max(20, 'Too Long')
+                .min(8, 'Too short min 8 symbols')
+                .max(20, 'Too long max 20 symbols')
                 .required('Required')
         });
 
