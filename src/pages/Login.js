@@ -1,62 +1,97 @@
 import React, {Component} from "react";
-import {Link} from "react-router-dom";
+import {Link as RouteLink} from "react-router-dom";
+import Link from '@material-ui/core/Link';
 import {inject, observer} from "mobx-react";
-
+import { Formik } from 'formik';
+import * as Yup from 'yup'
+import '../css/main.css'
+import Box from "@material-ui/core/Box";
+import Button from "@material-ui/core/Button";
+import { TextField } from 'formik-material-ui';
+import BaseInput from "../components/BaseInput";
 
 @inject('authStore')
 @observer
 
 class Login extends Component {
 
-    emailHandler = (e) => this.props.authStore.setEmail(e.target.value);
-    passwordHandler = (e) => this.props.authStore.setPassword(e.target.value);
-
     render() {
-        const { values } = this.props.authStore;
+
+        const SignInSchema = Yup.object().shape({
+            email: Yup.string()
+               .email('Invalid email')
+               .required('Required'),
+            password: Yup.string()
+                .min(6, 'Too Short')
+                .max(20, 'Too Long')
+                .required('Required')
+        });
 
         return (
-            <div className="auth-page">
-                <div className="container page">
-                    <div className="row">
-                        <div className="col-md-6 offset-md-3 col-xs-12">
-                            <h1 className="text-xs-center">Sign In</h1>
-                            <p className="text-xs-center">
-                                <Link to="register">Need an account?</Link>
-                            </p>
-                            <form >
-                                <fieldset>
-                                    <fieldset className="form-group">
-                                        <input
-                                            className="form-control form-control-lg"
-                                            type="email"
-                                            placeholder="Email"
-                                            value={values.email}
-                                            onChange={this.emailHandler}
-                                        />
-                                    </fieldset>
+            <Box
+                width="100%"
+                margin='auto'
+                maxWidth='1140px'
+            ><Box
+                    width="100%"
+                    textAlign='center'
+                    margin='auto'
+                    maxWidth='500px'
+                ><Box
+                        display='block'
+                        fontSize='40px'
+                        color='green'
+                        component="span"
+                        m={1}
+                    >Sign In</Box>
+                        <Link
+                            to={'/register'}
+                            component={RouteLink}
+                            underline='hover'
+                            color='textSecondary'
+                        >Need an account?</Link>
+                        <Formik
+                            initialValues={{ email: '', password: '' }}
+                            validationSchema={SignInSchema}
+                            onSubmit={this.props.authStore.fetchLogin}
+                        >
+                            {({ values, errors, touched, handleChange, handleSubmit, isSubmitting}) => (
 
-                                    <fieldset className="form-group">
-                                        <input
-                                            className="form-control form-control-lg"
-                                            type="password"
-                                            placeholder="Password"
-                                            value={values.password}
-                                            onChange={this.passwordHandler}
-                                        />
-                                    </fieldset>
-
-                                    <button
-                                        className="btn btn-lg btn-primary pull-xs-right"
-                                        type="submit"
+                                <form onSubmit={handleSubmit}>
+                                    <BaseInput
+                                        type='email'
+                                        name='email'
+                                        placeholder='Email'
+                                        value={values.email}
+                                        onChange={handleChange}
+                                        component={TextField}
+                                        touch={touched.email}
+                                        errors={errors.email}
+                                    />
+                                    <BaseInput
+                                        type='password'
+                                        name='password'
+                                        placeholder='Password'
+                                        value={values.password}
+                                        onChange={handleChange}
+                                        component={TextField}
+                                        touch={touched.password}
+                                        errors={errors.password}
+                                    />
+                                    <Button
+                                        size='large'
+                                        disabled={isSubmitting}
+                                        type='submit'
+                                        variant="contained"
+                                        color="secondary"
                                     >
-                                        Sign in
-                                    </button>
-                                </fieldset>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                                        {isSubmitting ? 'Loading': 'Sign in'}
+                                    </Button>
+                                </form>
+                            )}
+                        </Formik>
+                </Box>
+            </Box>
         )
     }
 }

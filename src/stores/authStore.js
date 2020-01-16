@@ -1,4 +1,6 @@
 import {action, observable} from "mobx";
+import axios from 'axios';
+import {BASE_API as api, loginData} from '../env'
 
 
 class AuthStore {
@@ -8,17 +10,10 @@ class AuthStore {
         login: ''
     };
 
-    @action setLogin = (login) => {
-        this.values.login = login
-    };
+    @action fetchLogin = (values, formik) => {
 
-    @action setPassword = (password) => {
-        this.values.password = password;
-    };
-
-    @action setEmail = (email) => {
-        this.values.email = email;
-    };
+        formik.setSubmitting(false);
+    }
 }
 
 export default new AuthStore();
