@@ -3,12 +3,12 @@ import {Link as RouteLink} from "react-router-dom";
 import Link from '@material-ui/core/Link';
 import {inject, observer} from "mobx-react";
 import { Formik } from 'formik';
-import * as Yup from 'yup'
-import '../css/main.css'
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import { TextField } from 'formik-material-ui';
 import BaseInput from "../components/BaseInput";
+import {SignInSchema} from "../components/ValidateSchema";
+import Error from "../components/Error";
 
 @inject('authStore')
 @observer
@@ -16,23 +16,12 @@ import BaseInput from "../components/BaseInput";
 class Login extends Component {
 
     render() {
-
-        const SignInSchema = Yup.object().shape({
-            email: Yup.string()
-               .email('Invalid email')
-               .required('Required'),
-            password: Yup.string()
-                .min(8, 'Too short min 8 symbols')
-                .max(20, 'Too long max 20 symbols')
-                .required('Required')
-        });
-
         return (
             <Box
                 width="100%"
                 margin='auto'
-                maxWidth='1140px'
-            ><Box
+                maxWidth='1140px'>
+                <Box
                     width="100%"
                     textAlign='center'
                     margin='auto'
@@ -55,7 +44,7 @@ class Login extends Component {
                             validationSchema={SignInSchema}
                             onSubmit={this.props.authStore.fetchLogin}
                         >
-                            {({ values, errors, touched, handleChange, handleSubmit, isSubmitting}) => (
+                            {({ values, errors, touched, handleChange, handleSubmit, isSubmitting, status}) => (
 
                                 <form onSubmit={handleSubmit}>
                                     <BaseInput
@@ -78,6 +67,8 @@ class Login extends Component {
                                         touch={touched.password}
                                         errors={errors.password}
                                     />
+                                    {status ?
+                                        <Error message={'Wrong login or password'}/> : null}
                                     <Button
                                         size='large'
                                         disabled={isSubmitting}

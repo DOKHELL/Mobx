@@ -1,21 +1,52 @@
-import React, {Component} from "react";
+import React from "react";
 import {Link} from "react-router-dom";
-import AcUnitIcon from '@material-ui/icons/AcUnit';
+import AlternateEmailSharpIcon from '@material-ui/icons/AlternateEmailSharp';
 import Box from "@material-ui/core/Box";
+import Button from "@material-ui/core/Button";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
 
 
 
-class Header extends Component {
-    render() {
+const Header = () => {
+    const [isOpen, setOpen] = React.useState(null);
+
+    const handleClick = e => {
+        setOpen(e.currentTarget);
+    };
+
+    const handleClose = () => {
+        setOpen(null);
+    };
         return (
-            <Box maxWidth='90%' margin='20px auto' justifyContent='space-between' display="flex">
+            <Box maxWidth='90%'
+                 margin='20px auto'
+                 justifyContent='space-between'
+                 display="flex">
                 <Link to='/'>
-                    <AcUnitIcon fontSize={'large'}/>
+                    <AlternateEmailSharpIcon color='primary' fontSize='large'/>
                 </Link>
                 <Box justifyContent='space-between' display="flex" maxWidth='150px' width='100%'>
-                    <Link to='/'>Home</Link>
-                    <Link to='/login'>Sign in</Link>
-                    <Link to='/register'>Sign up</Link>
+                    <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+                        Open Menu
+                    </Button>
+                    <Menu
+                        id="simple-menu"
+                        anchorEl={isOpen}
+                        keepMounted
+                        open={Boolean(isOpen)}
+                        onClose={handleClose}
+                    >
+                        <MenuItem component={Link}
+                                  to='/'
+                                  onClick={handleClose}>Home</MenuItem>
+                        <MenuItem component={Link}
+                                  to='/login'
+                                  onClick={handleClose}>Sign in</MenuItem>
+                        <MenuItem component={Link}
+                                  to='/register'
+                                  onClick={handleClose}>Sign up</MenuItem>
+                    </Menu>
                 </Box>
             </Box>
             // <nav className="navbar navbar-light">
@@ -45,7 +76,6 @@ class Header extends Component {
             //     </div>
             // </nav>
         )
-    }
-}
+};
 
 export default Header;
