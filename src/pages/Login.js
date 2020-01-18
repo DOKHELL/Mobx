@@ -68,7 +68,7 @@ class Login extends Component {
                                         errors={errors.password}
                                     />
                                     {status ?
-                                        <Error message={'Wrong login or password'}/> : null}
+                                        <Error message={'Wrong email or password'}/> : null}
                                     <Button
                                         size='large'
                                         disabled={isSubmitting}

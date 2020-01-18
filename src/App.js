@@ -4,6 +4,7 @@ import {observer} from "mobx-react";
 import Login from "./pages/Login";
 import Header from "./components/Header";
 import Registration from "./pages/Registration";
+import Home from "./pages/Home";
 
 
 
@@ -19,6 +20,7 @@ class App extends Component {
             <Switch>
                 <Route path='/login' component={Login}/>
                 <Route path='/register' component={Registration}/>
+                <Route path='/' component={Home}/>
             </Switch>
         </div>
     )

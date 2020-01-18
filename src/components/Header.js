@@ -5,6 +5,7 @@ import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
+import Container from "@material-ui/core/Container";
 
 
 
@@ -18,16 +19,22 @@ const Header = () => {
     const handleClose = () => {
         setOpen(null);
     };
+    const containerStyle = {
+        display: 'flex',
+        justifyContent: 'space-between',
+        margin: '20px auto'
+    };
         return (
-            <Box maxWidth='90%'
-                 margin='20px auto'
-                 justifyContent='space-between'
-                 display="flex">
+            <Container
+                style={containerStyle}
+                maxWidth='md'>
                 <Link to='/'>
                     <AlternateEmailSharpIcon color='primary' fontSize='large'/>
                 </Link>
-                <Box justifyContent='space-between' display="flex" maxWidth='150px' width='100%'>
-                    <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+                <Box>
+                    <Button aria-controls="simple-menu"
+                            aria-haspopup="true"
+                            onClick={handleClick}>
                         Open Menu
                     </Button>
                     <Menu
@@ -48,7 +55,7 @@ const Header = () => {
                                   onClick={handleClose}>Sign up</MenuItem>
                     </Menu>
                 </Box>
-            </Box>
+            </Container>
             // <nav className="navbar navbar-light">
             //     <div className="container">
             //         <a className="navbar-brand" href="index.html">conduit</a>
