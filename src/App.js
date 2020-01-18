@@ -6,10 +6,6 @@ import Header from "./components/Header";
 import Registration from "./pages/Registration";
 import Home from "./pages/Home";
 
-
-
-
-
 @withRouter
 @observer
 class App extends Component {

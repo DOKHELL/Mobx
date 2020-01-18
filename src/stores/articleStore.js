@@ -9,6 +9,7 @@ class ArticleStore {
         try {
             const response = await axios.get(`${api}/articles`);
             this.articles = response.data.articles;
+            console.log(response.data.articles)
 
         } catch (e) {
             console.log(e)
