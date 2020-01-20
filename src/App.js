@@ -4,7 +4,7 @@ import {observer} from "mobx-react";
 import Login from "./pages/Login";
 import Header from "./components/Header";
 import Registration from "./pages/Registration";
-import Home from "./pages/Home";
+import Home from "./pages/Home/Home";
 
 @withRouter
 @observer

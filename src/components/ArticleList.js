@@ -9,15 +9,14 @@ const ArticleList = props => {
             <div>
                 {props.articles.map((article, index) => {
                     return (
-                        <React.Fragment key={index}>
+                        <div className='article-preview' key={index}>
                             <ArticlePreview article={article}/>
                             <ArticleInfo article={article} />
-                            <hr style={{marginBottom: '20px'}}/>
-                        </React.Fragment>
+                        </div>
                     )
                 })}
             </div>
         )
-}
+};
 
 export default ArticleList;

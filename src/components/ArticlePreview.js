@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import {Link} from "react-router-dom";
-import '../css/article.css';
 import {inject, observer} from "mobx-react";
 
 @inject('articleStore')
@@ -21,9 +20,12 @@ class ArticlePreview extends Component {
                         {article.author.username}
                     </Link>
                     <span className="date">
-                  {new Date(article.createdAt).toDateString()}
-                </span>
+                      {new Date(article.createdAt).toDateString()}
+                    </span>
                 </div>
+                    <button className="btn btn-outline-primary btn-sm pull-xs-right">
+                        <i className="ion-heart"></i> 32
+                    </button>
             </div>
         )
     }

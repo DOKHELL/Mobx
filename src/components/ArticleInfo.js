@@ -1,12 +1,17 @@
 import React from "react";
+import Tags from "./Tags";
+import {Link} from "react-router-dom";
 
 const ArticleInfo = props => {
     return (
-            <div style={{marginBottom: '30px' }} className='article-info'>
-                <h2 style={{margin: '0 0 5px'}}>{props.article.title}</h2>
-                <p style={{margin: '0 0 15px', color: '#bbb'}}>{props.article.description}</p>
-                <span style={{margin: '0 0 15px', color: '#bbb'}}>Read more</span>
-            </div>
+        <Link href="" className="preview-link">
+            <h1>{props.article.title}</h1>
+            <p>{props.article.description}</p>
+            <span>Read more...</span>
+            <ul className="tag-list">
+                <Tags outline={true} tags={props.article.tagList}/>
+            </ul>
+        </Link>
     )
 };
 
